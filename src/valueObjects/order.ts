@@ -91,15 +91,12 @@ export const makeOrderQuantity = (
 	productCode: ProductCode,
 	quantity: number,
 ): Either.Either<OrderQuantity, string> => {
-	// Schema.is で型ガード！これがF#のパターンマッチの代わりじゃ！
 	if (Schema.is(WidgetCode)(productCode)) {
-		// Widgetなら UnitQuantity (整数)
 		return Schema.decodeUnknownEither(UnitQuantity)(Math.floor(quantity)).pipe(
 			Either.map((q) => ({ _tag: "Unit" as const, value: q })),
 			Either.mapLeft((e) => String(e)),
 		);
 	} else {
-		// Gizmoなら KilogramQuantity (小数)
 		return Schema.decodeUnknownEither(KilogramQuantity)(quantity).pipe(
 			Either.map((q) => ({ _tag: "Kilogram" as const, value: q })),
 			Either.mapLeft((e) => String(e)),
