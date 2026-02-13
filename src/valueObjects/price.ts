@@ -35,8 +35,6 @@ export const makeBillingAmount = (input: number) =>
 export const sumPrices = (
 	prices: Price[],
 ): Either.Either<BillingAmount, string> => {
-	// PriceはBrand型だが実行時はただのnumberなので、そのまま足せる！
-	// これがTypeScriptの「構造的」な強さよ！
 	const total = prices.reduce((sum, current) => sum + current, 0);
 	return makeBillingAmount(total);
 };
