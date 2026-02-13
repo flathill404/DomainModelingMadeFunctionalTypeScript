@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import { Either } from "effect";
 
 // An Id for Orders. Constrained to be a non-empty string < 10 chars
-const OrderId = Schema.String.pipe(
+export const OrderId = Schema.String.pipe(
 	Schema.maxLength(10),
 	Schema.nonEmptyString(),
 	Schema.brand("OrderId"),
@@ -42,7 +42,7 @@ const GizmoCode = Schema.String.pipe(
 export type GizmoCode = Schema.Schema.Type<typeof GizmoCode>;
 
 // A ProductCode is either a Widget or a Gizmo
-const ProductCode = Schema.Union(WidgetCode, GizmoCode);
+export const ProductCode = Schema.Union(WidgetCode, GizmoCode);
 export type ProductCode = Schema.Schema.Type<typeof ProductCode>;
 
 export const makeProductCode = (
@@ -81,7 +81,7 @@ const KilogramQuantity = Schema.Number.pipe(
 export type KilogramQuantity = Schema.Schema.Type<typeof KilogramQuantity>;
 
 // A Quantity is either a Unit or a Kilogram
-const OrderQuantity = Schema.Union(
+export const OrderQuantity = Schema.Union(
 	Schema.Struct({ _tag: Schema.Literal("Unit"), value: UnitQuantity }),
 	Schema.Struct({ _tag: Schema.Literal("Kilogram"), value: KilogramQuantity }),
 );

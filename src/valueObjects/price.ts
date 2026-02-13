@@ -21,7 +21,7 @@ export const multiplyPrice = (
 };
 
 // Constrained to be a decimal between 0.0 and 10000.00
-const BillingAmount = Schema.Number.pipe(
+export const BillingAmount = Schema.Number.pipe(
 	Schema.between(0, 10000),
 	Schema.brand("BillingAmount"),
 );

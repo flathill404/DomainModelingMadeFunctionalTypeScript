@@ -1,7 +1,7 @@
 import { Schema } from "@effect/schema";
 
 // Represents a PDF attachment
-const PdfAttachment = Schema.Struct({
+export const PdfAttachment = Schema.Struct({
 	name: Schema.String,
 	bytes: Schema.Uint8Array,
 });

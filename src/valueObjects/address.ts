@@ -29,7 +29,7 @@ export const makeUsStateCode = (input: string) =>
 	);
 
 // Address
-const Address = Schema.Struct({
+export const Address = Schema.Struct({
 	addressLine1: String50,
 	addressLine2: Schema.optional(String50),
 	addressLine3: Schema.optional(String50),

@@ -3,7 +3,7 @@ import { Either } from "effect";
 import { String50 } from "./common";
 
 // An email address
-const EmailAddress = Schema.String.pipe(
+export const EmailAddress = Schema.String.pipe(
 	Schema.pattern(/.+@.+/),
 	Schema.brand("EmailAddress"),
 );
