@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import { Either } from "effect";
 
 // Constrained to be 50 chars or less, not null
-const String50 = Schema.String.pipe(
+export const String50 = Schema.String.pipe(
 	Schema.maxLength(50),
 	Schema.nonEmptyString(),
 	Schema.brand("String50"),

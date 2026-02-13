@@ -1,5 +1,6 @@
 import { Schema } from "@effect/schema";
 import { Either } from "effect";
+import { String50 } from "./common";
 
 // A zip code
 const ZipCode = Schema.String.pipe(
@@ -26,3 +27,22 @@ export const makeUsStateCode = (input: string) =>
 	Schema.decodeUnknownEither(UsStateCode)(input).pipe(
 		Either.mapLeft(() => `Invalid US State Code`),
 	);
+
+// Address
+const Address = Schema.Struct({
+	addressLine1: String50,
+	addressLine2: Schema.optional(String50),
+	addressLine3: Schema.optional(String50),
+	addressLine4: Schema.optional(String50),
+	city: String50,
+	zipCode: ZipCode,
+	state: UsStateCode,
+	country: String50,
+});
+export type Address = Schema.Schema.Type<typeof Address>;
+
+export const makeAddress = (input: unknown) => {
+	return Schema.decodeUnknownEither(Address)(input).pipe(
+		Either.mapLeft(() => `Invalid Address format`),
+	);
+};
