@@ -15,7 +15,7 @@ export const makeOrderId = (input: string) =>
 	);
 
 // An Id for OrderLines. Constrained to be a non-empty string < 10 chars
-const OrderLineId = Schema.String.pipe(
+export const OrderLineId = Schema.String.pipe(
 	Schema.maxLength(10),
 	Schema.nonEmptyString(),
 	Schema.brand("OrderLineId"),

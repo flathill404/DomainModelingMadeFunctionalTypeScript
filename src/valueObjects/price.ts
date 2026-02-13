@@ -2,7 +2,7 @@ import { Schema } from "@effect/schema";
 import { Either } from "effect";
 
 // Constrained to be a decimal between 0.0 and 1000.00
-const Price = Schema.Number.pipe(
+export const Price = Schema.Number.pipe(
 	Schema.between(0, 1000),
 	Schema.brand("Price"),
 );
@@ -38,3 +38,17 @@ export const sumPrices = (
 	const total = prices.reduce((sum, current) => sum + current, 0);
 	return makeBillingAmount(total);
 };
+
+export const PromotionCode = Schema.String.pipe(
+	Schema.minLength(3),
+	Schema.maxLength(10),
+	Schema.brand("PromotionCode"),
+);
+export type PromotionCode = Schema.Schema.Type<typeof PromotionCode>;
+
+export const makePromotionCode = (input: string) =>
+	Schema.decodeUnknownEither(PromotionCode)(input).pipe(
+		Either.mapLeft(
+			() => `PromotionCode must be between 3 and 10 characters in length`,
+		),
+	);

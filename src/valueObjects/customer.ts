@@ -43,7 +43,7 @@ export const makePersonalName = (firstName: string, lastName: string) => {
 };
 
 // CustomerInfo
-const CustomerInfo = Schema.Struct({
+export const CustomerInfo = Schema.Struct({
 	name: PersonalName,
 	emailAddress: EmailAddress,
 	vipStatus: VipStatus,
