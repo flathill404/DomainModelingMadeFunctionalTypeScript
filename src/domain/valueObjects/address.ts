@@ -1,6 +1,6 @@
 import { Schema } from "@effect/schema";
-import { Either } from "effect";
 import { String50 } from "./common";
+import { createDecorder } from "./utils";
 
 // A zip code
 const ZipCode = Schema.String.pipe(
@@ -9,10 +9,7 @@ const ZipCode = Schema.String.pipe(
 );
 export type ZipCode = Schema.Schema.Type<typeof ZipCode>;
 
-export const makeZipCode = (input: string) =>
-	Schema.decodeUnknownEither(ZipCode)(input).pipe(
-		Either.mapLeft(() => `ZipCode must be 5 digits`),
-	);
+export const decodeZipCode = createDecorder(ZipCode);
 
 // A US 2 letter state code
 const UsStateCode = Schema.String.pipe(
@@ -23,10 +20,7 @@ const UsStateCode = Schema.String.pipe(
 );
 export type UsStateCode = Schema.Schema.Type<typeof UsStateCode>;
 
-export const makeUsStateCode = (input: string) =>
-	Schema.decodeUnknownEither(UsStateCode)(input).pipe(
-		Either.mapLeft(() => `Invalid US State Code`),
-	);
+export const decodeUsStateCode = createDecorder(UsStateCode);
 
 // Address
 export const Address = Schema.Struct({
@@ -41,8 +35,4 @@ export const Address = Schema.Struct({
 });
 export type Address = Schema.Schema.Type<typeof Address>;
 
-export const makeAddress = (input: unknown) => {
-	return Schema.decodeUnknownEither(Address)(input).pipe(
-		Either.mapLeft(() => `Invalid Address format`),
-	);
-};
+export const decodeAddress = createDecorder(Address);
