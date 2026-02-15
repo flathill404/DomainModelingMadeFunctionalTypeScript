@@ -1,6 +1,6 @@
 import { Schema } from "@effect/schema";
 import { Either } from "effect";
-import { ValidationError } from "../../types/errors";
+import type { ValidationError } from "../../types/errors";
 import { createDecorder } from "./utils";
 
 // An Id for Orders. Constrained to be a non-empty string < 10 chars

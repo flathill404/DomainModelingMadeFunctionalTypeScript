@@ -1,10 +1,10 @@
 import { describe, expect, test } from "bun:test";
 import { Either } from "effect";
 import {
-	type Price,
 	decodeBillingAmount,
 	decodePrice,
 	multiplyPrice,
+	type Price,
 	sumPrices,
 } from "./price.ts";
 

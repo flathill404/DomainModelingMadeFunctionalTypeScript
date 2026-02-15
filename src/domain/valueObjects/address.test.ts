@@ -32,14 +32,17 @@ describe("decodeZipCode", () => {
 });
 
 describe("decodeUsStateCode", () => {
-	test.each(["CA", "NY", "TX", "FL", "WA"])(
-		"accepts valid state code %s",
-		(code) => {
-			const result = decodeUsStateCode(code);
-			expect(Either.isRight(result)).toBe(true);
-			expect(Either.getOrThrow(result) as string).toBe(code);
-		},
-	);
+	test.each([
+		"CA",
+		"NY",
+		"TX",
+		"FL",
+		"WA",
+	])("accepts valid state code %s", (code) => {
+		const result = decodeUsStateCode(code);
+		expect(Either.isRight(result)).toBe(true);
+		expect(Either.getOrThrow(result) as string).toBe(code);
+	});
 
 	test("rejects an invalid state code", () => {
 		expect(Either.isLeft(decodeUsStateCode("XX"))).toBe(true);
@@ -98,9 +101,9 @@ describe("decodeAddress", () => {
 	});
 
 	test("rejects an address with invalid state code", () => {
-		expect(
-			Either.isLeft(decodeAddress({ ...validAddress, state: "XX" })),
-		).toBe(true);
+		expect(Either.isLeft(decodeAddress({ ...validAddress, state: "XX" }))).toBe(
+			true,
+		);
 	});
 
 	test("rejects an address with missing required field", () => {
